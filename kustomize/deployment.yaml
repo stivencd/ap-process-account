@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment-process-account
+  labels:
+    app: service-process-account
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-process-account
+  template:
+    metadata:
+      labels:
+        app: service-process-account
+    spec:
+      containers:
+      - name: app-process-account
+        image: stivid007/nodejs-process-account:1
+        ports:
+        - containerPort: 8080
+        env:
+        - name: NACOS_SERVERADDR
+          value: "164.90.255.230:8848"
+        - name: NACOS_NAMESPACE
+          value: "aforo255"
+        - name: NACOS_IDENTITYKEY
+          value: "nacos"
+        - name: NACOS_IDENTITYVALUE
+          value: "nacos"
+        - name: NACOS_ENV
+          value: "PROD"
